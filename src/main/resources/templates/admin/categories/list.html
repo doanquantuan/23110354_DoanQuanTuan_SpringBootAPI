@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+    <section class="row" layout:fragment="content">
+	    <div class="col mt-4">
+	        <div class="card shadow-sm">
+	            <div class="card-header d-flex justify-content-between align-items-center">
+	                <h5 class="mb-0">Category List</h5>
+	                <a href="/admin/categories/add" class="btn btn-primary">
+	                    <i class="fa-solid fa-plus"></i> Add Category
+	                </a>
+	            </div>
+	            <div class="card-body">
+	                <!-- Thông báo -->
+	                <div th:if="${message != null}" class="alert alert-success" role="alert">
+	                    <div th:text="${message}"></div>
+	                </div>
+	
+	                <!-- Bảng categories -->
+	                <div class="table-responsive">
+	                    <table class="table table-hover align-middle">
+	                        <thead class="table-dark">
+	                            <tr>
+	                                <th scope="col">#ID</th>
+	                                <th scope="col">Category Name</th>
+	                                <th scope="col" class="text-center">Actions</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr th:each="category: ${categories}">
+	                                <td th:text="${category.categoryId}"></td>
+	                                <td th:text="${category.categoryName}"></td>
+	                                <td class="text-center">
+	                                    <a th:href="@{'/admin/categories/view/' + ${category.categoryId}}" 
+	                                       class="btn btn-sm btn-outline-info mx-1" title="View">
+	                                        <i class="fa-solid fa-circle-info"></i>
+	                                    </a>
+	                                    <a th:href="@{'/admin/categories/edit/' + ${category.categoryId}}" 
+	                                       class="btn btn-sm btn-outline-warning mx-1" title="Edit">
+	                                        <i class="fa-solid fa-pen"></i>
+	                                    </a>
+	                                    <a th:href="@{'/admin/categories/delete/' + ${category.categoryId}}" 
+	                                       class="btn btn-sm btn-outline-danger mx-1" title="Delete"
+	                                       onclick="return confirm('Are you sure you want to delete this category?');">
+	                                        <i class="fa-solid fa-trash"></i>
+	                                    </a>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div> <!-- /.table-responsive -->
+	            </div> <!-- /.card-body -->
+	        </div> <!-- /.card -->
+	    </div> <!-- /.col -->
+	</section>
+
+</html>
