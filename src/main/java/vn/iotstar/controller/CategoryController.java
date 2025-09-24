@@ -40,7 +40,7 @@ public class CategoryController {
 	public String add(ModelMap model) { 
 		CategoryModel category = new CategoryModel();
 		model.addAttribute("category", category);
-		return "admin/categories/addOrEdit";
+		return "admin/categories/add-ajax";
 	}
 	
 	@RequestMapping("")
@@ -54,7 +54,7 @@ public class CategoryController {
 	public ModelAndView saveOrUpdate(ModelMap model, 
 			@Valid @ModelAttribute("category") CategoryModel cateModel, BindingResult result) {
 		if (result.hasErrors()) {
-			return new ModelAndView("admin/categories/addOrEdit");
+			return new ModelAndView("admin/categories/add-ajax");
 		}
 		CategoryEntity entity = new CategoryEntity();
 		BeanUtils.copyProperties(cateModel, entity);

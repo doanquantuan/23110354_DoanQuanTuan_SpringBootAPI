@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/Layout-admin.html}">
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3 mt-4">
+            <form th:action="@{/admin/categories/saveOrUpdate}" method="POST" th:object="${category}">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 th:text="${category.isEdit} ? 'Edit Category' : 'Add New Category'">Add New Category</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3" th:if="${category.isEdit}">
+                            <label for="categoryId" class="form-label">Category ID:</label>
+                            <input type="hidden" th:field="*{isEdit}">
+                            <input type="text" readonly="readonly" class="form-control" th:field="*{categoryId}" id="categoryId" name="categoryId"
+                                   aria-describedby="categoryId" placeholder="Category ID">
+                            <div th:if="${#fields.hasErrors('categoryId')}" id="categoryIdId" class="form-text text-muted">
+                                <span class="text-danger">Category ID is required!</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Category Name:</label>
+                            <input type="text" class="form-control" th:field="*{categoryName}" id="categoryName" name="categoryName"
+                                   aria-describedby="categoryNameId" placeholder="Category Name">
+                            <div th:if="${#fields.hasErrors('categoryName')}" id="categoryNameId" class="form-text text-muted">
+                                <span class="text-danger">Category Name is required!</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+						    <label for="status" class="form-label">Status:</label>
+						    <select class="form-select" th:field="*{status}" id="status" name="status">
+						        <option th:value="1" th:selected="${category.status == 1}">Active</option>
+						        <option th:value="0" th:selected="${category.status == 0}">Inactive</option>
+						    </select>
+						</div>
+						
+						<div class="card-footer text-center">
+						    <button type="submit" class="btn btn-primary"
+						            th:if="${category.isEdit}">
+						        Update
+						    </button>
+						    <button type="submit" class="btn btn-success"
+						            th:unless="${category.isEdit}">
+						        Insert
+						    </button>
+						</div>
+						
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</html>

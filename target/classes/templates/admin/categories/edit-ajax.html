@@ -1,0 +1,80 @@
+<div class="modal" tabindex="-1" role="dialog" id="updateCategoryInfoModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Category</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="far fa-address-card mr1"></i>Category</h5>
+                    </div>
+                    <div class="card-body pb-0">
+                        <p id="updateCategoryInfoModalId"></p>
+                        <p id="updateCategoryInfoModalName"></p>
+                        <p id="updateCategoryInfoModalIcon"></p>
+                    </div>
+                </div>
+                <div class="card mt-2">
+                    <div class="card-header">
+                        <h5><i class="far fa-address-card mr1"></i>Update Category</h5>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form id="updateCategory" method="post" onsubmit="return false;" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="categoryName">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName_up" name="categoryName">
+                            </div>
+                            <div class="form-group">
+                                <label for="new_icon">Icon</label>
+                                <input type="file" class="form-control" id="icon_up" name="icon">
+                            </div>
+                            <input type="hidden" id="categoryId_up" name="categoryId">
+                            <div class="form-group row">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    /* Edit - Show modal with data */
+    function showEditCategoryModal(categoryId, categoryName, icon, btn) {
+        $('#updateCategoryInfoModalId')[0].innerText = "Category ID: " + categoryId;
+        $('#updateCategoryInfoModalName')[0].innerText = "Category Name: " + categoryName;
+        $('#updateCategoryInfoModalIcon')[0].innerText = "Icon: " + icon;
+        $('#categoryName_up')[0].value = categoryName;
+        $('#categoryId_up')[0].value = categoryId;
+        $('#updateCategoryInfoModal').modal('show');
+    }
+
+    /* Update category via AJAX */
+    $("form#updateCategory").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: contextPath + '/api/category/updateCategory',
+            type: 'PUT',
+            dataType: "json",
+            data: formData,
+            success: function (data) {
+                location.reload();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>

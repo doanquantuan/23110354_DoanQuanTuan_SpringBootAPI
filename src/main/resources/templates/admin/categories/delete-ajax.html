@@ -1,0 +1,29 @@
+<!-- Nút xóa trong vòng lặp -->
+<a href="#" data-id="'+ json[i].categoryId +'" class="btn btn-outline-danger btn-delete">
+    <i class="fa fa-trash"></i>
+</a>
+
+<script type="text/javascript">
+    // Xóa category với AJAX
+    $(document).delegate('.btn-delete', 'click', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var parent = $(this).closest('tr'); // lấy dòng table
+
+        if (confirm('Do you really want to delete this category?')) {
+            $.ajax({
+                type: "DELETE",
+                url: contextPath + '/api/category/deleteCategory?categoryId=' + id,
+                dataType: "json",
+                success: function() {
+                    parent.fadeOut('slow', function() {
+                        $(this).remove();
+                    });
+                },
+                error: function() {
+                    alert('Delete failed! Please try again.');
+                }
+            });
+        }
+    });
+</script>

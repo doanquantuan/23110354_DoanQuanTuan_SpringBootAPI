@@ -16,7 +16,11 @@ public interface ICategoryService {
     
     Optional<CategoryEntity> findById(Integer id);
     
+    Optional<CategoryEntity> findByCategoryName(String name);
+    
     CategoryEntity save(CategoryEntity category);
+    
+    void delete(CategoryEntity entity);
     
     void deleteById(Integer id);
     

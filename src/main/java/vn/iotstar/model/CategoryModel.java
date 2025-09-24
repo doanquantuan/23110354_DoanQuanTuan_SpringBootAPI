@@ -2,6 +2,8 @@ package vn.iotstar.model;
 
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,9 @@ public class CategoryModel implements Serializable{
 	private int categoryId;
 	private String categoryName;
 	private String images;
+	
+	private MultipartFile icon;
+	
 	private int status;
 	private int userId;
 	

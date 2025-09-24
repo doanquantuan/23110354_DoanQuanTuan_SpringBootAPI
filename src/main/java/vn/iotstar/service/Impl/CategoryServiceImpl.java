@@ -65,4 +65,16 @@ public class CategoryServiceImpl implements ICategoryService{
 		return categoryRepository.count();
 	}
 
+
+	@Override
+	public Optional<CategoryEntity> findByCategoryName(String name) {
+		return categoryRepository.findByCategoryName(name);
+	}
+
+
+	@Override
+	public void delete(CategoryEntity entity) {
+		categoryRepository.delete(entity);
+	}
+
 }

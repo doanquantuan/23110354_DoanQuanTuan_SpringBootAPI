@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout-admin.html}">
+<body>
+	<section class="row" layout:fragment="content">
+		<div class="col mt-4">
+			<div class="card">
+				<div class="card-header">Search Category</div>
+				<div class="card-body">
+					<form th:action="@{/admin/categories/search}" method="get">
+						<input type="text" name="categoryName"
+							placeholder="Enter category name" class="form-control" />
+						<button type="submit" class="btn btn-primary mt-2">Search</button>
+					</form>
+
+
+					<table class="table table-striped mt-3"
+						th:if="${categories != null}">
+						<thead>
+							<tr>
+								<th>Category ID</th>
+								<th>Category Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="category : ${categories}">
+								<td th:text="${category.categoryId}"></td>
+								<td th:text="${category.categoryName}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
